@@ -8,6 +8,20 @@
       "when": 1717820430592,
       "tag": "0000_white_thunderbird",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1718156887328,
+      "tag": "0001_natural_silver_samurai",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1718165066231,
+      "tag": "0002_tired_anthem",
+      "breakpoints": true
     }
   ]
 }
