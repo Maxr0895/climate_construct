@@ -22,6 +22,20 @@
       "when": 1718165066231,
       "tag": "0002_tired_anthem",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1718846230905,
+      "tag": "0003_odd_kylun",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1718847048677,
+      "tag": "0004_good_swarm",
+      "breakpoints": true
     }
   ]
 }
