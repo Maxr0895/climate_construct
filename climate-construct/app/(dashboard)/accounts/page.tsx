@@ -61,7 +61,7 @@ if ( accountsQuery.isLoading ) {
         </CardHeader>
         <CardContent>
          <DataTable
-         filterKey="email"
+         filterKey="project code"
             columns={columns} 
             data={accounts}
             onDelete = {(row) => {

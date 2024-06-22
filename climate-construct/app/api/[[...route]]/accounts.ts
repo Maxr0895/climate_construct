@@ -8,7 +8,6 @@ import { HTTPException } from "hono/http-exception";
 import { and, eq, inArray } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2"
 
-
 const app = new Hono()
   .get(
     "/",
@@ -24,6 +23,11 @@ const app = new Hono()
         .select({
           id: accounts.id,
           name: accounts.name,
+          division: accounts.division,
+          startDate: accounts.startDate,
+          endDate: accounts.endDate,
+          operationalControl: accounts.operationalControl, // Include operationalControl in select
+          projectCode: accounts.projectCode, // Include projectCode in select
         })
         .from(accounts)
         .where(eq(accounts.userId, auth.userId));
@@ -51,6 +55,11 @@ const app = new Hono()
     .select({
       id: accounts.id,
       name: accounts.name,
+      division: accounts.division,
+      startDate: accounts.startDate,
+      endDate: accounts.endDate,
+      operationalControl: accounts.operationalControl, // Include operationalControl in select
+      projectCode: accounts.projectCode, // Include projectCode in select
     })
     .from(accounts)
     .where(
@@ -70,6 +79,11 @@ const app = new Hono()
   clerkMiddleware(),
   zValidator("json", insertAccountSchema.pick({
     name: true,
+    division: true,
+    startDate: true,
+    endDate: true,
+    operationalControl: true, // Include operationalControl in insert schema
+    projectCode: true, // Include projectCode in insert schema
   })),
   async (c) =>{
     const auth = getAuth(c);
@@ -124,6 +138,9 @@ zValidator(
   "json",
   insertAccountSchema.pick({
     name: true,
+    division: true,
+    operationalControl: true, // Include operationalControl in update schema
+    projectCode: true, // Include projectCode in update schema
   }),
 ),
 async (c) => {

@@ -14,6 +14,11 @@ export const accounts = pgTable("accounts", {
   plaidId: text("plaid_id"),
   name: text("name").notNull(),
   userId: text("user_id").notNull(),
+ division: text("division"), 
+ startDate: date("start_date"), // Add start date column
+  endDate: date("end_date"), // Add end date column
+  operationalControl: text("operational_control"), // Add operational control column
+projectCode: text("project_code"), // Add project code column
 });
 
 export const accountsRelations = relations(accounts, ({ many }) => ({
