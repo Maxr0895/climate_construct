@@ -34,15 +34,6 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-        const defaultTo = new Date();
-      const defaultFrom = subDays(defaultTo, 30);
-
-      const startDate = from 
-        ? parse(from, "yyyy-MM-dd", new Date())
-        : defaultFrom;
-      const endDate = to
-        ? parse(to, "yyyy-MM-dd", new Date())
-        : defaultTo;
 
       const data = await db
         .select({
@@ -63,8 +54,7 @@ const app = new Hono()
           and(
             accountId ? eq(transactions.accountId, accountId) : undefined,
             eq(accounts.userId, auth.userId),
-            gte(transactions.date, startDate),
-            lte(transactions.date, endDate),
+           
           )
         )
         .orderBy(desc(transactions.date));
@@ -129,11 +119,14 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      const [data] = await db.insert(transactions).values({
-        id: createId(),
-        ...values,
-      }).returning();
-     return c.json({ data });
+
+     const [data] = await db.insert(transactions).values({
+  id: createId(),
+  ...values,
+  date: values.date.toISOString().split('T')[0],
+}).returning();
+
+return c.json({ data });
   })
  .post(
     "/bulk-create",
@@ -154,15 +147,16 @@ const app = new Hono()
         return c.json({ error: "Unauthorized" }, 401);
       }
 
-      const data = await db
-        .insert(transactions)
-        .values(
-          values.map((value) => ({
-            id: createId(),
-            ...value,
-          }))
-        )
-        .returning();
+   const data = await db
+  .insert(transactions)
+  .values(
+    values.map((value) => ({
+      id: createId(),
+      ...value,
+      date: value.date.toISOString().split('T')[0],
+    }))
+  )
+  .returning();
         
       return c.json({ data });
     },
@@ -244,14 +238,17 @@ const app = new Hono()
           )),
       );
 
-      const [data] = await db
-        .with(transactionsToUpdate)
-        .update(transactions)
-        .set(values)
-        .where(
-          inArray(transactions.id, sql`(select id from ${transactionsToUpdate})`)
-        )
-        .returning();
+     const [data] = await db
+  .with(transactionsToUpdate)
+  .update(transactions)
+  .set({
+    ...values,
+    date: values.date.toISOString().split('T')[0],
+  })
+  .where(
+    inArray(transactions.id, sql`(select id from ${transactionsToUpdate})`)
+  )
+  .returning();
         
 
       if (!data) {

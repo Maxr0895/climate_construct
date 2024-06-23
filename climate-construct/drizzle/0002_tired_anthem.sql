@@ -20,3 +20,7 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
+
+
+ALTER TABLE "transactions"
+ALTER COLUMN "date" TYPE date USING "date"::date;

@@ -27,6 +27,7 @@ const formSchema = z.object({
   payee: z.string(),
   amount: z.string(),
   notes: z.string().nullable().optional(),
+  attachments: z.array(z.instanceof(File)).optional(),
 });
 
 const apiSchema = insertTransactionSchema.omit({
@@ -196,6 +197,7 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
+
         <Button className="w-full" disabled={disabled}>
           {id ? "Save changes" : "Create transaction"}
         </Button>

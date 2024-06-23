@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { format, parse } from "date-fns";
+import { format, parse, isValid } from "date-fns";
 
 import { 
   Card,
@@ -12,7 +12,7 @@ import { convertAmountToMiliunits } from "@/lib/utils";
 
 import { ImportTable } from "./import-table";
 
-const dateFormat = "yyyy-MM-dd HH:mm:ss";
+const dateFormat = "M/d/yyyy";
 const outputFormat = "yyyy-MM-dd";
 
 const requiredOptions = [
@@ -98,14 +98,22 @@ export const ImportCard = ({
       }, {});
     });
 
-    const formattedData = arrayOfData.map((item) => ({
+ const formattedData = arrayOfData
+  .filter((item) => item.date)
+  .map((item) => {
+    const parsedDate = parse(item.date, dateFormat, new Date());
+    if (!isValid(parsedDate)) {
+      throw new Error(`Invalid date: ${item.date}`);
+    }
+    return {
       ...item,
       amount: convertAmountToMiliunits(parseFloat(item.amount)),
-      date: format(parse(item.date, dateFormat, new Date()), outputFormat)
-    }));
+      date: format(parsedDate, outputFormat),
+    };
+  });
 
-    onSubmit(formattedData);
-  };
+  onSubmit(formattedData);
+};
 
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
