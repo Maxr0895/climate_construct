@@ -5,7 +5,8 @@ import summary from "./summary";
 import accounts from "./accounts";
 import categories from "./categories";
 import transactions from "./transactions";
-
+import subcontractor from "./subcontractor";
+import water from "./water";
 
 export const runtime = "edge";
 
@@ -18,6 +19,8 @@ const routes = app
   .route("/accounts", accounts)
   .route("/categories", categories)
   .route("/transactions", transactions)
+  .route("/subcontractor", subcontractor)
+  .route("/water", water);
 
 export const GET = handle(app);
 export const POST = handle(app);

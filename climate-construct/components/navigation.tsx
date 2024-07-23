@@ -34,6 +34,10 @@ const routes = [
     href: "/settings",
     label: "Settings",
   },
+   {
+    href: "/water",
+    label: "Water",
+  },
 ];
 
 export const Navigation = () => {

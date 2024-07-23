@@ -64,6 +64,76 @@
       "when": 1719107021649,
       "tag": "0008_chubby_lester",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1721715573114,
+      "tag": "0009_fancy_adam_destine",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1721715640430,
+      "tag": "0010_mixed_sally_floyd",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1721715965907,
+      "tag": "0011_wise_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1721716000015,
+      "tag": "0012_far_exiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1721716626905,
+      "tag": "0013_milky_bastion",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1721716941941,
+      "tag": "0014_dark_newton_destine",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1721717115975,
+      "tag": "0015_mixed_justin_hammer",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1721718749444,
+      "tag": "0016_wet_la_nuit",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1721718901671,
+      "tag": "0017_normal_nighthawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1721719846864,
+      "tag": "0018_ambitious_maggott",
+      "breakpoints": true
     }
   ]
 }

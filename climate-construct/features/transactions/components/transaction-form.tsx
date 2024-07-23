@@ -24,10 +24,12 @@ const formSchema = z.object({
   date: z.coerce.date(),
   accountId: z.string(),
   categoryId: z.string().nullable().optional(),
-  payee: z.string(),
+  supplier: z.string(),
   amount: z.string(),
   notes: z.string().nullable().optional(),
-  attachments: z.array(z.instanceof(File)).optional(),
+  units: z.string().nullable().optional(),
+  volume: z.string().nullable().optional(),
+  expense_category: z.string().nullable().optional(),
 });
 
 const apiSchema = insertTransactionSchema.omit({
@@ -143,17 +145,17 @@ export const TransactionForm = ({
           )}
         />
         <FormField
-          name="payee"
+          name="supplier"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                Payee
+                Supplier
               </FormLabel>
               <FormControl>
                 <Input
                   disabled={disabled}
-                  placeholder="Add a payee"
+                  placeholder="Add a supplier"
                   {...field}
                 />
               </FormControl>
@@ -178,6 +180,7 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
+    
         <FormField
           name="notes"
           control={form.control}
@@ -197,7 +200,63 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
-
+   <FormField
+          name="expense_category"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Expense Category
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  value={field.value ?? ""}
+                  disabled={disabled}
+                  placeholder="Optional notes"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="units"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Units
+              </FormLabel>
+              <FormControl>
+                <AmountInput
+                  {...field}
+                  disabled={disabled}
+                  placeholder="0.00"
+                  value={field.value || ""}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="volume"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Volume
+              </FormLabel>
+              <FormControl>
+                <AmountInput
+                  {...field}
+                  disabled={disabled}
+                  placeholder="0.00"
+                  value={field.value || ""}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <Button className="w-full" disabled={disabled}>
           {id ? "Save changes" : "Create transaction"}
         </Button>

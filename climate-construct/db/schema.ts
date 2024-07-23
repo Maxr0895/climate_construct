@@ -4,10 +4,12 @@ import { relations } from "drizzle-orm";
 import { 
   integer, 
   pgTable, 
+  numeric,
   text, 
   timestamp,
   date
 } from "drizzle-orm/pg-core";
+import { decimal } from "drizzle-orm/mysql-core";
 
 export const accounts = pgTable("accounts", {
   id: text("id").primaryKey(),
@@ -43,7 +45,10 @@ export const insertCategorySchema = createInsertSchema(categories);
 export const transactions = pgTable("transactions", {
   id: text("id").primaryKey(),
   amount: integer("amount").notNull(),
-  payee: text("payee").notNull(),
+   supplier: text("supplier").notNull(),
+   expense_category: text("expense_category"),
+   units: text("units"),
+   volume: numeric("volume"),
   notes: text("notes"),
   date: date("date").notNull(),
   accountId: text("account_id").references(() => accounts.id, {
@@ -52,6 +57,7 @@ export const transactions = pgTable("transactions", {
   categoryId: text("category_id").references(() => categories.id, {
     onDelete: "set null",
   }),
+ 
 });
 
 export const transactionsRelations = relations(transactions, ({ one }) => ({
