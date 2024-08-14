@@ -127,21 +127,21 @@ export const columns: ColumnDef<ResponseType>[] = [
     }
   },
   {
-    accessorKey: "account",
+    accessorKey: "accountId",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Account
+          Account ID
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: ({ row }) => {
       return (
-        <AccountColumn
+         <AccountColumn
           account={row.original.account}
           accountId={row.original.accountId}
         />

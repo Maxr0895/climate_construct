@@ -162,6 +162,25 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
+           <FormField
+          name="expense_category"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Expense Category
+              </FormLabel>
+              <FormControl>
+                 <Input
+          disabled={disabled}
+          placeholder="Add an expense category"
+          {...field}
+          value={field.value ?? ''} // Ensure value is not null
+        />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <FormField
           name="amount"
           control={form.control}
@@ -180,8 +199,46 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
-    
+  
         <FormField
+          name="units"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Units
+              </FormLabel>
+              <FormControl>
+                 <Input
+          disabled={disabled}
+          placeholder="Select Units"
+          {...field}
+          value={field.value ?? ''} // Ensure value is not null
+        />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+    <FormField
+          name="volume"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Volume
+              </FormLabel>
+              <FormControl>
+                 <Input
+          disabled={disabled}
+          placeholder="Enter Volume"
+          {...field}
+          value={field.value ?? ''} // Ensure value is not null
+        />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+           <FormField
           name="notes"
           control={form.control}
           render={({ field }) => (
@@ -195,63 +252,6 @@ export const TransactionForm = ({
                   value={field.value ?? ""}
                   disabled={disabled}
                   placeholder="Optional notes"
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-   <FormField
-          name="expense_category"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Expense Category
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  value={field.value ?? ""}
-                  disabled={disabled}
-                  placeholder="Optional notes"
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="units"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Units
-              </FormLabel>
-              <FormControl>
-                <AmountInput
-                  {...field}
-                  disabled={disabled}
-                  placeholder="0.00"
-                  value={field.value || ""}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="volume"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Volume
-              </FormLabel>
-              <FormControl>
-                <AmountInput
-                  {...field}
-                  disabled={disabled}
-                  placeholder="0.00"
-                  value={field.value || ""}
                 />
               </FormControl>
             </FormItem>

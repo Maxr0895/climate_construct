@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Projector } from "lucide-react";
 
 import { useGetAccount } from "@/features/accounts/api/use-get-account";
 import { AccountForm } from "@/features/accounts/components/account-form";
@@ -67,9 +67,19 @@ export const EditAccountSheet = () => {
   };
 
   const defaultValues = accountQuery.data ? {
-    name: accountQuery.data.name
+    name: accountQuery.data.name,
+    projectCode: accountQuery.data.projectCode,
+    operationalControl: accountQuery.data.operationalControl,
+    division: accountQuery.data.division,
+    startDate: accountQuery.data.startDate,
+    endDate: accountQuery.data.endDate,
   } : {
     name: "",
+    projectCode: "",
+    operationalControl: "",
+    division: "",
+    startDate: "",
+    endDate: "",
   };
 
   return (
