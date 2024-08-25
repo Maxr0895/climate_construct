@@ -87,7 +87,6 @@ const app = new Hono()
           id: transactions.id,
           date: transactions.date,
           categoryId: transactions.categoryId,
-          category: categories.name,
           supplier: transactions.supplier,
           amount: transactions.amount,
           notes: transactions.notes,

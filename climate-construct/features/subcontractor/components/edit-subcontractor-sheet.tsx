@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { Loader2, Volume } from "lucide-react";
 
-import { useGetTransaction } from "@/features/transactions/api/use-get-transaction";
-import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
-import { useEditTransaction } from "@/features/transactions/api/use-edit-transaction";
-import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
-import { TransactionForm } from "@/features/transactions/components/transaction-form";
+import { useGetSubcontractor } from "@/features/subcontractor/api/use-get-subcontractor";
+import { useOpenSubcontractor } from "@/features/subcontractor/hooks/use-open-subcontractor";
+import { useEditSubcontractor } from "@/features/subcontractor/api/use-edit-subcontractor";
+import { useDeleteSubcontractor } from "@/features/subcontractor/api/use-delete-subcontractor";
+import { SubcontractorForm } from "@/features/subcontractor/components/subcontractor-form";
 
 import { useGetCategories } from "@/features/categories/api/use-get-categories";
 import { useCreateCategory } from "@/features/categories/api/use-create-category";
@@ -14,7 +14,7 @@ import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { useCreateAccount } from "@/features/accounts/api/use-create-account";
 
 import { useConfirm } from "@/hooks/use-confirm";
-import { insertTransactionSchema } from "@/db/schema";
+import { insertSubcontractorSchema } from "@/db/schema";
 import {
   Sheet,
   SheetContent,
@@ -23,23 +23,23 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-const formSchema = insertTransactionSchema.omit({
+const formSchema = insertSubcontractorSchema.omit({
   id: true,
 });
 
 type FormValues = z.input<typeof formSchema>;
 
-export const EditTransactionSheet = () => {
-  const { isOpen, onClose, id } = useOpenTransaction();
+export const EditSubcontractorSheet = () => {
+  const { isOpen, onClose, id } = useOpenSubcontractor();
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this transaction."
+    "You are about to delete this subcontractor."
   );
 
-  const transactionQuery = useGetTransaction(id);
-  const editMutation = useEditTransaction(id);
-  const deleteMutation = useDeleteTransaction(id);
+  const subcontractorQuery = useGetSubcontractor(id);
+  const editMutation = useEditSubcontractor(id);
+  const deleteMutation = useDeleteSubcontractor(id);
 
   const categoryQuery = useGetCategories();
   const categoryMutation = useCreateCategory();
@@ -64,12 +64,12 @@ export const EditTransactionSheet = () => {
   const isPending =
     editMutation.isPending ||
     deleteMutation.isPending ||
-    transactionQuery.isLoading ||
+    subcontractorQuery.isLoading ||
     categoryMutation.isPending ||
     accountMutation.isPending;
 
   const isLoading = 
-    transactionQuery.isLoading ||
+    subcontractorQuery.isLoading ||
     categoryQuery.isLoading ||
     accountQuery.isLoading;
 
@@ -93,18 +93,18 @@ export const EditTransactionSheet = () => {
     }
   };
 
-  const defaultValues = transactionQuery.data ? {
-    accountId: transactionQuery.data.accountId,
-    categoryId: transactionQuery.data.categoryId,
-    amount: transactionQuery.data.amount.toString(),
-    date: transactionQuery.data.date 
-      ? new Date(transactionQuery.data.date)
+  const defaultValues = subcontractorQuery.data ? {
+    accountId: subcontractorQuery.data.accountId,
+    categoryId: subcontractorQuery.data.categoryId,
+    amount: subcontractorQuery.data.amount.toString(),
+    date: subcontractorQuery.data.date 
+      ? new Date(subcontractorQuery.data.date)
       : new Date(),
-    supplier: transactionQuery.data.supplier,
-    units: transactionQuery.data.units,
-    volume: transactionQuery.data.volume,
-    notes: transactionQuery.data.notes,
-    expense_category: transactionQuery.data.expense_category,
+    supplier: subcontractorQuery.data.supplier,
+    units: subcontractorQuery.data.units,
+    volume: subcontractorQuery.data.volume,
+    notes: subcontractorQuery.data.notes,
+    expense_category: subcontractorQuery.data.expense_category,
   } : {
     accountId: "",
     categoryId: "",
@@ -124,10 +124,10 @@ export const EditTransactionSheet = () => {
         <SheetContent className="space-y-4">
           <SheetHeader>
             <SheetTitle>
-              Edit Transaction
+              Edit Subcontractor
             </SheetTitle>
             <SheetDescription>
-              Edit an existing transaction
+              Edit an existing subcontractor
             </SheetDescription>
           </SheetHeader>
           {isLoading
@@ -136,7 +136,7 @@ export const EditTransactionSheet = () => {
                 <Loader2 className="size-4 text-muted-foreground animate-spin" />
               </div>
             ) : (
-              <TransactionForm
+              <SubcontractorForm
                 id={id}
                 defaultValues={defaultValues}
                 onSubmit={onSubmit}

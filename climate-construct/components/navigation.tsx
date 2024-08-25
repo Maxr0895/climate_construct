@@ -30,14 +30,15 @@ const routes = [
     href: "/categories",
     label: "Categories",
   },
+   {
+    href: "/subcontractor",
+    label: "Subcontractor",
+  },
   {
     href: "/settings",
     label: "Settings",
   },
-   {
-    href: "/water",
-    label: "Water",
-  },
+  
 ];
 
 export const Navigation = () => {

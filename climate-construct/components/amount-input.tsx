@@ -1,3 +1,4 @@
+import React, { forwardRef } from 'react';
 import CurrencyInput from "react-currency-input-field";
 import { Info, MinusCircle, PlusCircle } from "lucide-react";
 
@@ -16,12 +17,12 @@ type Props = {
   disabled?: boolean;
 };
 
-export const AmountInput = ({
+export const AmountInput = forwardRef<HTMLInputElement, Props>(({
   value,
   onChange,
   placeholder,
   disabled,
-}: Props) => {
+}, ref) => {
   const parsedValue = parseFloat(value);
   const isIncome = parsedValue > 0;
   const isExpense = parsedValue < 0;
@@ -58,6 +59,7 @@ export const AmountInput = ({
         </Tooltip>
       </TooltipProvider>
       <CurrencyInput
+        ref={ref}
         prefix="$"
         className="pl-10 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         placeholder={placeholder}
@@ -73,4 +75,6 @@ export const AmountInput = ({
       </p>
     </div>
   );
-};
+});
+
+AmountInput.displayName = 'AmountInput';

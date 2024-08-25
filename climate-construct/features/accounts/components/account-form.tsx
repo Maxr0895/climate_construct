@@ -19,7 +19,7 @@ import {
 const formSchema = insertAccountSchema.pick({
   name: true,
   division: true, // Include division in form schema
-    startDate: true, // Include startDate in form schema
+  startDate: true, // Include startDate in form schema
   endDate: true, // Include endDate in form schema
   operationalControl: true, // Include operationalControl in form schema
   projectCode: true, // Include projectCode in form schema

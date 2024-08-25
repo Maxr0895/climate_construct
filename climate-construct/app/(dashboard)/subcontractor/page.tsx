@@ -4,14 +4,18 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2, Plus } from "lucide-react";
 
-import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
-import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
-import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete-transactions";
-import { useBulkCreateTransactions } from "@/features/transactions/api/use-bulk-create-transactions";
+import { useNewSubcontractor } from "@/features/subcontractor/hooks/use-new-subcontractor";
+import { useGetSubcontractors } from "@/features/subcontractor/api/use-get-subcontractors"; // Updated
+import { useBulkDeleteSubcontractor } from "@/features/subcontractor/api/use-bulk-delete-subcontractor"; // Updated
+import { useBulkCreateSubcontractor } from "@/features/subcontractor/api/use-bulk-create-subcontractor"; // Updated
+
+import { NewSubcontractorSheet } from "@/features/subcontractor/components/new-subcontractor-sheet";
+import { EditTransactionSheet } from "@/features/transactions/components/edit-transaction-sheet";
+
 
 import { useSelectAccount } from "@/features/accounts/hooks/use-select-account";
 
-import { transactions as transactionSchema } from "@/db/schema";
+import { subcontractors as subcontractorSchema } from "@/db/schema"; // Updated
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -37,7 +41,7 @@ const INITIAL_IMPORT_RESULTS = {
   meta: {},
 };
 
-const TransactionsPage = () => {
+const SubcontractorPage = () => {
   const [AccountDialog, confirm] = useSelectAccount();
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
   const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
@@ -53,18 +57,18 @@ const TransactionsPage = () => {
     setVariant(VARIANTS.LIST);
   };
 
-  const newTransaction = useNewTransaction();
-  const createTransactions = useBulkCreateTransactions();
-  const deleteTransactions = useBulkDeleteTransactions();
-  const transactionsQuery = useGetTransactions();
-  const transactions = transactionsQuery.data || [];
+  const newSubcontractor = useNewSubcontractor();
+  const createSubcontractors = useBulkCreateSubcontractor(); // Updated
+  const deleteSubcontractors = useBulkDeleteSubcontractor(); // Updated
+  const subcontractorsQuery = useGetSubcontractors(); // Updated
+  const subcontractors = Array.isArray(subcontractorsQuery.data) ? subcontractorsQuery.data : []; // Updated
 
   const isDisabled =
-    transactionsQuery.isLoading ||
-    deleteTransactions.isPending;
+    subcontractorsQuery.isLoading ||
+    deleteSubcontractors.isPending; // Updated
 
   const onSubmitImport = async (
-    values: typeof transactionSchema.$inferInsert[],
+    values: typeof subcontractorSchema.$inferInsert[], // Updated
   ) => {
     const accountId = await confirm();
 
@@ -78,14 +82,14 @@ const TransactionsPage = () => {
       date: new Date(value.date),
     }));
 
-    createTransactions.mutate(data, {
+    createSubcontractors.mutate(data, { // Updated
       onSuccess: () => {
         onCancelImport();
       },
     });
   };
 
-  if (transactionsQuery.isLoading) {
+  if (subcontractorsQuery.isLoading) { // Updated
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
@@ -120,11 +124,14 @@ const TransactionsPage = () => {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
           <CardTitle className="text-xl line-clamp-1">
-            Transaction History
+            Subcontractor History
           </CardTitle>
           <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
             <Button 
-              onClick={newTransaction.onOpen} 
+               onClick={() => {
+    console.log('newSubcontractor state:', newSubcontractor);
+    newSubcontractor.onOpen();
+  }} 
               size="sm"
               className="w-full lg:w-auto"
             >
@@ -138,17 +145,18 @@ const TransactionsPage = () => {
           <DataTable
             filterKey="supplier"
             columns={columns} 
-            data={transactions}
+            data={subcontractors} // Updated
             onDelete={(row) => {
               const ids = row.map((r) => r.original.id);
-              deleteTransactions.mutate({ ids });
+              deleteSubcontractors.mutate({ ids }); // Updated
             }}
-            disabled={isDisabled}
+            disabled={isDisabled} // Updated
           />
         </CardContent>
       </Card>
+     
     </div>
   );
 };
  
-export default TransactionsPage;
+export default SubcontractorPage;
