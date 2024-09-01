@@ -1,0 +1,66 @@
+Overview
+Name: Max Reinhardt
+Student number: n8501645
+Application name: Climate Construct
+Two line description: A web application for sustainability data collection in construction projects, featuring financial tracking, GHG emissions categorization, and transaction management.
+Core criteria
+Docker image
+ECR Repository name: climate-construct-repo
+Video timestamp: TBC
+Relevant files: 
+Dockerfile
+
+Docker image running on EC2
+EC2 instance ID: i-0dc8bc17ecd39bfca
+Video timestamp: TBC
+User login functionality
+One line description: Basic user login implemented with clerk auth
+Video timestamp: TBC
+Relevant files:
+(auth) folder
+User dependent functionality
+One line description: Users can view and add transactions based on their role and permissions.
+Video timestamp: TBC
+Relevant files:
+userController.js
+transaction.js
+Web client
+One line description: A clean, responsive interface for managing and visualizing financial and emissions data in construction projects.
+Video timestamp:  TBC
+Relevant files:
+(dashboard) page.tsx
+REST API
+One line description: A RESTful API that supports CRUD operations for transactions, enabling data management and retrieval.
+Video timestamp: TBC
+Relevant files:
+api.js
+routes/transactions.js
+Two kinds of data
+First kind
+One line description: Financial transaction data, including supplier, amount, and GHG scope.
+Type: Structured data (stored in a database)
+Rationale: Essential for tracking and analyzing financial and emissions data within the app.
+Video timestamp: TBC
+Relevant files:
+models/transaction.js
+db.js
+Second kind
+One line description: User settings data, such as preferences and roles.
+Type: Structured data (stored in a database)
+Rationale: Supports user-specific functionality, allowing personalized experiences and role-based access.
+Video timestamp: [Timestamp showing interaction with user settings]
+Relevant files:
+models/user.js
+settings.js
+CPU intensive task
+One line description: GHG emissions calculation based on transaction data, which is triggered by a user request.
+Video timestamp: [Timestamp showing CPU-intensive task execution]
+Relevant files:
+emissionsCalculator.js
+cpuLoadTest.js
+CPU load testing method
+One line description: Scripted HTTP requests simulate multiple users calculating GHG emissions to load the server.
+Video timestamp: [Timestamp showing CPU load testing]
+Relevant files:
+cpuLoadTest.js
+loadTestScript.sh
