@@ -22,8 +22,7 @@ User dependent functionality
 One line description: Users can view and add transactions based on their role and permissions.
 Video timestamp: TBC
 Relevant files:
-userController.js
-transaction.js
+
 Web client
 One line description: A clean, responsive interface for managing and visualizing financial and emissions data in construction projects.
 Video timestamp:  TBC
@@ -42,8 +41,7 @@ Type: Structured data (stored in a database)
 Rationale: Essential for tracking and analyzing financial and emissions data within the app.
 Video timestamp: TBC
 Relevant files:
-models/transaction.js
-db.js
+schema.ts
 Second kind
 One line description: User settings data, such as preferences and roles.
 Type: Structured data (stored in a database)
@@ -56,11 +54,8 @@ CPU intensive task
 One line description: GHG emissions calculation based on transaction data, which is triggered by a user request.
 Video timestamp: [Timestamp showing CPU-intensive task execution]
 Relevant files:
-emissionsCalculator.js
-cpuLoadTest.js
+
 CPU load testing method
 One line description: Scripted HTTP requests simulate multiple users calculating GHG emissions to load the server.
 Video timestamp: [Timestamp showing CPU load testing]
 Relevant files:
-cpuLoadTest.js
-loadTestScript.sh
