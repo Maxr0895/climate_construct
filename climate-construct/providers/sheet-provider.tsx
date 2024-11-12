@@ -13,6 +13,9 @@ import { EditCategorySheet } from "@/features/categories/components/edit-categor
 import { NewTransactionSheet } from "@/features/transactions/components/new-transaction-sheet";
 import { EditTransactionSheet } from "@/features/transactions/components/edit-transaction-sheet";
 
+import { NewSubcontractorSheet } from "@/features/subcontractor/components/new-subcontractor-sheet";
+import { EditSubcontractorSheet } from "@/features/subcontractor/components/edit-subcontractor-sheet";
+
 
 export const SheetProvider = () => {
   const isMounted = useMountedState();
@@ -27,6 +30,8 @@ export const SheetProvider = () => {
       <EditCategorySheet />
       <NewTransactionSheet />
       <EditTransactionSheet />
+      <NewSubcontractorSheet />
+      <EditSubcontractorSheet />
     </>
   );
 };
